@@ -4,7 +4,7 @@
 library(MASS)
 set.seed(342345)
 za = -qnorm(0.025)
-n = 20
+n = 45
 rhotru = 0.7
 M = 1000
 
@@ -63,19 +63,20 @@ cat('\n')
 
 #SAMPLE OUTPUT
 # 
-#      rhotru    rhohat
-# [1,]    0.7 0.5386438
-# 
-#         fshtru    fshhat
-# [1,] 0.8673005 0.6022431
-# 
-#       asyci.rho   bootci.rho
-# 97.5% 0.1625276  -0.08377435
-#  2.5%  0.7780872  0.79649247
-# 
-#       asyci.fishz bootci.fishz
-# 97.5%   0.1639818  -0.08397116
-# 2.5%    1.0405044   1.08894419
+#       rhotru   rhohat
+#  [1,]    0.7 0.624156
+#
+#          fshtru    fshhat
+#  [1,] 0.8673005 0.7317847
+#
+#        asyci.rho bootci.rho
+#  97.5% 0.4133215  0.3105505
+#  2.5%  0.7714741  0.8119680
+#
+#        asyci.fishz bootci.fishz
+#  97.5%   0.4396105    0.3211545
+#  2.5%    1.0239588    1.1327783
+
 
 
 
