@@ -6,13 +6,13 @@ set.seed(342345)
 za = -qnorm(0.025)
 n = 50
 alftru = 3
-bettru = 0.5
+bettru = 2
 M = 200
 
 #TRUE PARAMETER VALUE is 1/sqrt(alftru) = 0.5774
 
 #GENERATE SAMPLE OF SIZE n FROM GAMMA(alftru,bettru) DISTRIBUTION
-yorig = rgamma(n,alftru,scale=bettru)
+yorig = rgamma(n,alftru,rate=bettru)
 
 #COMPUTE ESTIMATES OF THETA FROM THE ORIGINAL DATA
 thhat = sd(yorig)/mean(yorig)
