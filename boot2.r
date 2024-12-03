@@ -11,6 +11,7 @@ M = 1000
 #TRUE PARAMETER VALUE is 1/sqrt(alftru) = 0.5774
 
 #GENERATE SAMPLE OF SIZE n FROM GAMMA(alftru,bettru) DISTRIBUTION
+#using parameterization in Wasserman
 yorig = rgamma(n,alftru,rate=bettru)
 
 #COMPUTE ESTIMATES OF THETA FROM THE ORIGINAL DATA
