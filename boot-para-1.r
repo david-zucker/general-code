@@ -80,7 +80,7 @@ theta_lo_2 = thhat - cihw2
 theta_hi_2 = thhat + cihw2
 
 #BOOSTRAP CI
-q = quantile(tstar,c(0.975,0.025),type=8)
+q = quantile(tstar,c(0.975,0.025),type=4)
 theta_lo_3 = thhat - q[1]
 theta_hi_3 = thhat - q[2]
 
