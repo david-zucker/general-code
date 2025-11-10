@@ -1,4 +1,4 @@
-#Exercise Set 4, Question 6
+#Exercise Set 3, Question 3
 
 #I'm using the fact that the sample points are unique
 
@@ -18,6 +18,7 @@ for (i in 2:n) {
 lines(c(xs[n],1),c(1,1))
   
   
+
 
 
 
