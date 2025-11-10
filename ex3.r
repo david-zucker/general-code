@@ -1,67 +1,63 @@
+setwd("C:/Users/owner/Dropbox/WORK/Zucker/Stat for DS/Targilim/5786")
 
+#READ DATA
+indat = read.table('bmi.txt')
+x = indat[,1]
+n = length(x)
 
-
-fxn = function(x,n) {     
-  kvec = 0:floor(x)
-  ktrm = (-1)^kvec * choose(n,kvec) * (x-kvec)^n 
-  ans = sum(ktrm)/factorial(n)
-  return(ans)
-}  
-
-nvec = c(10, 15, 20, 25)
-epsvec = c(0.01, 0.05, 0.10, 0.15, 0.20)
-
-for (ixn in 1:4) {
-  
-  n = nvec[ixn]
-  print.noquote(paste0('n = ', n))
-  ansr = NULL
-  
-  for (ixe in 1:3) {
-    eps = epsvec[ixe]
-    eps2 = eps^2
-    pi0 = 1 - fxn(0.5*n*(eps+1),n) + fxn(0.5*n*(-eps+1),n)
-    pi1 = 1/(3*n*eps2)
-    pi2.arg = 1/sqrt(pi1)
-    pi2 = 1 - pnorm(pi2.arg) + pnorm(-pi2.arg)
-    pi3 = 2 * exp(-0.5*eps2*n)
-    anscur = c(pi0,pi1,pi2,pi3)
-    ansr = rbind(ansr,anscur)
-  }  
-
-  ansr = as.data.frame(ansr)
-  colnames(ansr) = c('pi0','pi1','pi2','pi3')
-  rownames(ansr) = c('eps=0.01','eps=0.05', 'eps=0.10')
-  print(ansr)
-  cat('\n')
-  
+#COMPUTE REQUIRED SAMPLE MOMENTS
+mm = rep(0,6)
+for (j in 1:6) {
+  mm[j] = mean(x^j)
 }
 
-# > source("C:/Users/owner/Desktop/ex3.r")
-# [1] n = 10
-# pi0        pi1       pi2      pi3
-# eps=0.01 0.9569785 333.333333 0.9563199 1.999000
-# eps=0.05 0.7872974  13.333333 0.7841912 1.975156
-# eps=0.10 0.5890374   3.333333 0.5838824 1.902459
-# 
-# [1] n = 15
-# pi0        pi1       pi2      pi3
-# eps=0.01 0.9470523 222.222222 0.9465164 1.998501
-# eps=0.05 0.7397674   8.888889 0.7373157 1.962849
-# eps=0.10 0.5060142   2.222222 0.5023350 1.855487
-# 
-# [1] n = 20
-# pi0        pi1       pi2      pi3
-# eps=0.01 0.9387208 166.666667 0.9382579 1.998001
-# eps=0.05 0.7005897   6.666667 0.6985354 1.950620
-# eps=0.10 0.4413567   1.666667 0.4385780 1.809675
-# 
-# [1] n = 25
-# pi0        pi1       pi2      pi3
-# eps=0.01 0.9314007 133.333333 0.9309874 1.997502
-# eps=0.05 0.6667839   5.333333 0.6650055 1.938466
-# eps=0.10 0.3886361   1.333333 0.3864762 1.764994
+#QUESTION 5
 
-    
-    
-  
+psihat = mm[2] - mm[1]^2
+varpsi = mm[4] - 4*mm[1]*mm[3] + 8*(mm[1]^2)*mm[2] - mm[2]^2 - 4*(mm[1]^4)
+varpsi = varpsi/n
+sdpsi = sqrt(varpsi)
+cvpr = 0.95
+zcrit = qnorm(1-(1-cvpr)/2)
+cihw1 = zcrit*sdpsi
+psi_lo = psihat - cihw1
+psi_hi = psihat + cihw1
+print(cbind(psihat, cihw1, psi_lo, psi_hi))
+
+#QUESTION 6
+
+eta_hat = log(psihat)
+cihw2 = zcrit*sdpsi / psihat
+eta_lo = eta_hat - cihw2
+eta_hi = eta_hat + cihw2
+print(cbind(eta_hat, cihw2, eta_lo, eta_hi))
+psi_lo_2 = exp(eta_lo)
+psi_hi_2 = exp(eta_hi)
+print(cbind(psi_lo_2, psi_hi_2))
+
+#QUESTION 7
+
+A = mm[2] - mm[1]^2
+B = mm[3] - mm[1]*mm[2]
+C = mm[4] - mm[2]^2
+D = mm[4] - mm[1]*mm[3]
+E = mm[5] - mm[2]*mm[3]
+F = mm[6] - mm[3]^2
+
+sig = sqrt(A)
+sig3 = sig^3
+sig5 = sig^5
+mu3hat = mm[3] - 3*mm[2]*mm[1] + 2*(mm[1]^3)
+gamhat = mu3hat/sig^3
+
+G = 3*mm[1]*mu3hat/sig5 + (6*(mm[1]^2) - 3*mm[2])/sig3
+H = -(3/2)*mu3hat/sig5 - 3*mm[1]/sig3
+K = 1/sig3
+
+tau2 = A*(G^2) + 2*B*G*H + 2*D*G*K + C*(H^2) + 2*E*H*K + F*(K^2)
+
+cihw3 = zcrit * (1/sqrt(n)) * sqrt(tau2)
+gam_lo = gamhat - cihw3
+gam_hi = gamhat + cihw3
+print(cbind(gamhat, cihw3, gam_lo, gam_hi))
+
