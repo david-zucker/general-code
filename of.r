@@ -1,5 +1,5 @@
 
-#Exercise Set 4, Question 7
+#Exercise Set 3, Question 4
 #Old Faithful geyser data
 
 setwd("C:/Users/owner/Dropbox/WORK/Zucker/Stat for DS/Targilim/5785")
@@ -37,4 +37,5 @@ Fn.rslt = my.edf(indat$waiting)
 plot(Fn.rslt$x1, Fn.rslt$Fn, xlab='x',ylab='F(x)', type='l')
 lines(Fn.rslt$x1, Fn.rslt$Fn-eps,col='red')
 lines(Fn.rslt$x1, Fn.rslt$Fn+eps,col='red')
+
 
