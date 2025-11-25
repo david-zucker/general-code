@@ -4,7 +4,7 @@
 a = read.table('sbp1dat.txt')
 xdat = a[,1]
 adj = 1
-den = density(xdat,bw="SJ",adjust=adj)
+den = density(xdat,bw="SJ",kernel='epanechnikov',adjust=adj)
 x = den$x
 f = den$y
 fmin = min(f)
@@ -23,5 +23,6 @@ bw=den$bw
 print(bw)
 
 adj = 0.5
-den1 = density(xdat,bw="SJ",adjust=adj)
+den1 = density(xdat,bw="SJ",kernel='epanechnikov',adjust=adj)
 plot(den1$x,den1$y,type='l')
+
