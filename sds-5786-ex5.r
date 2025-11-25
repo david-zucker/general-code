@@ -1,4 +1,4 @@
-setwd("C:/Users/owner/Dropbox/WORK/Zucker/Stat for DS/Targilim/5786")
+#setwd("C:/Users/owner/Dropbox/WORK/Zucker/Stat for DS/Targilim/5786")
 
 set.seed(2295378)
 
@@ -239,3 +239,4 @@ print(ci3)
 cat('\n')
 print(noquote('Studentized bootstrap CI'))
 print(ci4)
+
