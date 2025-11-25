@@ -21,3 +21,7 @@ lines(x,f,lty=1)
 rug(jitter(xdat))
 bw=den$bw
 print(bw)
+
+adj = 0.5
+den1 = density(xdat,bw="SJ",adjust=adj)
+plot(den1$x,den1$y,type='l')
