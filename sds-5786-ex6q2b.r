@@ -7,7 +7,7 @@ n = length(x)
 xmin = min(x)
 xmax = max(x)
 xval = xmin + (xmax-xmin)*c(0:511)/511
-ssdint = 1.46e-6
+ssdint = 9.76e-7
 kerfac = 0.5/sqrt(pi)
 hopt = (kerfac/(n*ssdint))^(1/5)
 
@@ -38,3 +38,4 @@ dmax2 = max(denest2)
 dmax = max(dmax1,dmax2)
 plot(xval,denest1,type="l",ylim=c(0,dmax))
 lines(xval,denest2,lty=1,col="green")
+
