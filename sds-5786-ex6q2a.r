@@ -8,7 +8,7 @@ xmean = mean(x)
 sdx = sd(x)
 iqrsd = IQR(x)/1.349
 sig = min(sdx,iqrsd)
-hopt2 = 0.77*sig*(n^(-1/9))
+hopt2 = 0.9397*sig*(n^(-1/9))
 
 #SECOND DERIVATIVE OF NORMAL KERNEL
 krnld2 = function(u) {
@@ -47,3 +47,4 @@ for (m in 1:M) {
  } 
 
 print(ssdires)  
+
