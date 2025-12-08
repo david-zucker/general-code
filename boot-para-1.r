@@ -41,7 +41,6 @@ asyvar = function(alfhat,bethat) {
   vmat = solve(infmat)
   grd = matrix(c(bethat,alfhat),2,1)
   asyvar = t(grd) %*% vmat %*% grd / n
-  if (asyvar < 0) browser()
   return(asyvar)
 }  
   
@@ -146,5 +145,6 @@ cat('\n')
 #asy/boot  1.758756 2.121791
 #bootstrap 1.750191 2.119082
 #stu boot  1.761410 2.143114
+
 
 
